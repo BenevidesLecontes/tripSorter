@@ -2,20 +2,20 @@ import React, {Component} from 'react';
 import {Layout, Menu, Row} from 'antd';
 import {Icon} from 'react-fa'
 import './home.component.css'
-import SearchBoxComponent from "../search-box/search-box.component";
+import SearchBoxForm from "../search-box/search-box.component";
 import ResultsComponent from "../results/results.component";
 
-const SubMenu = Menu.SubMenu;
-
 const {Header, Sider, Content} = Layout;
-const customSiderStyles = {height: '100vh'};
-const MenuItemGroup = Menu.ItemGroup;
 
 class HomeComponent extends Component {
+  toggleForm = () => {
+    this.form.resetFields();
+  };
+  
   render() {
     return (
       <Layout style={{minHeight: '100vh'}}>
-        <Sider style={customSiderStyles} width={500}>
+        <Sider width={500}>
           <div className="home-bg">
             <a href="/home" className="logo-alt">
               <i className="icon-logo"/>
@@ -46,8 +46,8 @@ class HomeComponent extends Component {
                     Accusantium alias, aliquam amet architecto.</p>
                 </div>
               </Row>
-              <SearchBoxComponent/>
-              <ResultsComponent/>
+              <SearchBoxForm ref={form => this.form = form}/>
+              <ResultsComponent resetForm={this.toggleForm}/>
             </main>
           </Content>
         </Layout>

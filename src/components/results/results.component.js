@@ -28,6 +28,7 @@ class ResultsComponent extends Component {
             </div>
             <Button size="large"
                     style={{width: '100%'}}
+                    onClick={() => this.props.resetForm()}
                     type="danger"
                     icon="rollback">Reset</Button>
           </Card>

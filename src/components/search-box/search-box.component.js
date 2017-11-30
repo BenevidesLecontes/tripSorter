@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Button, Col, Radio, Row} from 'antd';
+import {Button, Col, Form, Radio, Row, Select} from 'antd';
 import './search-box.component.css'
-import UserSelectComponent from "../search-combo/search-combo.component";
 
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
+const Option = Select.Option;
 
 class SearchBoxComponent extends Component {
   constructor(props) {
@@ -19,110 +17,107 @@ class SearchBoxComponent extends Component {
     }
   }
   
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+  
+  handleFormChanges = (value, field) => {
+    this.props.form.setFieldsValue({
+      [field]: value
+    });
+  };
+  customValueValidator = (rule, value, callback) => {
+    const formValues = this.props.form.getFieldsValue(['origin', 'destination']);
+    if (formValues && formValues.destination === formValues.origin) {
+      callback(true);
+    } else {
+      callback();
+    }
+  };
+  
   render() {
+    const {getFieldDecorator} = this.props.form;
     return (
-      <Row type="flex" justify="center" className="mt-10">
-        <Col xs={20} sm={20} md={21} lg={6}>
-          <UserSelectComponent placeholder={'From'}
-                               sourceData={this.state.citiesFrom}
-                               handleChange={(origin) => this.setState({origin})}/></Col>
-        <Col xs={20} sm={20} md={21} lg={6} className="ml-6-lg">
-          <UserSelectComponent placeholder={'To'}
-                               sourceData={this.state.citiesTo}
-                               handleChange={(destination) => this.setState({destination})}/></Col>
-        <Col xs={20} sm={20} md={21} lg={6} className="text-right-md">
-          <RadioGroup
-            size="large"
-            defaultValue="a">
-            <RadioButton value="a">Cheapest</RadioButton>
-            <RadioButton value="b">Fastest</RadioButton>
-          </RadioGroup>
-        </Col>
-        <Col xs={20} sm={20} md={21} lg={3} xl={4} className="v-align">
-          <Button size="large"
-                  type="danger"
-                  icon="search">Search</Button></Col>
-      </Row>
+      <Form onSubmit={this.handleSubmit}>
+        <Row type="flex" justify="center" className="mt-10">
+          <Col xs={20} sm={20} md={21} lg={6}>
+            <Form.Item>
+              {getFieldDecorator('origin', {
+                rules: [{required: true, message: 'Please select your origin!'}],
+                initialValue: undefined
+              })(
+                <Select
+                  combobox={false}
+                  allowClear
+                  className="from"
+                  size="large"
+                  onChange={origin => this.handleFormChanges(origin, 'origin')}
+                  style={{width: '100%'}}
+                  placeholder="From">
+                  {this.state.citiesFrom.sort().map((d, index) => <Option value={d} key={index}>{d}</Option>)}
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col xs={20} sm={20} md={21} lg={6} className="ml-6-lg">
+            <Form.Item>
+              {getFieldDecorator('destination', {
+                rules: [{required: true, message: 'Please select your destination!'},
+                  {
+                    message: 'Your destination must be different from your origin.',
+                    validator: (rule, value, cb) => this.customValueValidator(rule, value, cb)
+                  }],
+                initialValue: undefined
+              })(
+                <Select
+                  className="to"
+                  combobox={false}
+                  allowClear
+                  size="large"
+                  onChange={destination => this.handleFormChanges(destination, 'destination')}
+                  style={{width: '100%'}}
+                  placeholder="To">
+                  {this.state.citiesTo.sort().map((d, index) => <Option value={d} key={index}>{d}</Option>)}
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col xs={20} sm={20} md={21} lg={6} className="text-right-md">
+            <Form.Item>
+              {getFieldDecorator('option', {
+                initialValue: 'a'
+              })(
+                <Radio.Group
+                  size="large"
+                  name="options"
+                  onChange={(option) => this.handleFormChanges(option, 'option')}>
+                  <Radio.Button value="a">Cheapest</Radio.Button>
+                  <Radio.Button value="b">Fastest</Radio.Button>
+                </Radio.Group>
+              )}
+            </Form.Item>
+          </Col>
+          <Col xs={20} sm={20} md={21} lg={3} xl={4} className="align-search-btn">
+            <Form.Item>
+              <Button size="large"
+                      htmlType="submit"
+                      type="danger"
+                      icon="search">Search</Button>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
     )
   }
-  findPath(){
-    const problem = {
-      start: {A: 5, B: 2},
-      A: {C: 4, D: 2},
-      B: {A: 8, D: 7},
-      C: {D: 6, finish: 3},
-      D: {finish: 1},
-      finish: {}
-    };
   
-    const lowestCostNode = (costs, processed) => {
-      return Object.keys(costs).reduce((lowest, node) => {
-        if (lowest === null || costs[node] < costs[lowest]) {
-          if (!processed.includes(node)) {
-            lowest = node;
-          }
-        }
-        return lowest;
-      }, null);
-    };
-
-// function that returns the minimum cost and path to reach Finish
-    const dijkstra = (graph) => {
-    
-      // track lowest cost to reach each node
-      const costs = Object.assign({finish: Infinity}, graph.start);
-    
-      // track paths
-      const parents = {finish: null};
-      for (let child in graph.start) {
-        parents[child] = 'start';
-      }
-    
-      // track nodes that have already been processed
-      const processed = [];
-    
-      let node = lowestCostNode(costs, processed);
-    
-      while (node) {
-        let cost = costs[node];
-        let children = graph[node];
-        for (let n in children) {
-          let newCost = cost + children[n];
-          if (!costs[n]) {
-            costs[n] = newCost;
-            parents[n] = node;
-          }
-          if (costs[n] > newCost) {
-            costs[n] = newCost;
-            parents[n] = node;
-          }
-        }
-        processed.push(node);
-        node = lowestCostNode(costs, processed);
-      }
-    
-      let optimalPath = ['finish'];
-      let parent = parents.finish;
-      while (parent) {
-        optimalPath.push(parent);
-        parent = parents[parent];
-      }
-      optimalPath.reverse();
-    
-      const results = {
-        distance: costs.finish,
-        path: optimalPath
-      };
-    
-      return results;
-    };
-  
-    console.log(dijkstra(problem));
-  }
   filterDuplicated(deals) {
     const citiesFrom = deals.map(t => t.departure);
     const citiesTo = deals.map(t => t.arrival);
-    
     this.setState({
       deals, citiesFrom: Array.from(new Set(citiesFrom)),
       citiesTo: Array.from(new Set(citiesTo))
@@ -131,8 +126,9 @@ class SearchBoxComponent extends Component {
   
   componentDidMount() {
     axios.get('./data/response.json').then(res => this.filterDuplicated(res.data.deals));
-    this.findPath();
   }
 }
 
-export default SearchBoxComponent;
+const SearchBoxForm = Form.create({})(SearchBoxComponent);
+export {SearchBoxForm};
+export default SearchBoxForm;

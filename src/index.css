@@ -47,6 +47,7 @@
     font-style: normal;
 
 }
+
 @font-face {
     font-family: 'Lato Light';
     src: local('Lato SemiBold Light'), local('LatoSemiboldLight'),
@@ -56,10 +57,11 @@
     font-style: normal;
 
 }
+
 @font-face {
     font-family: 'icomoon';
-    src:  url('fonts/icomoon.eot?htdcyo');
-    src:  url('fonts/icomoon.eot?htdcyo#iefix') format('embedded-opentype'),
+    src: url('fonts/icomoon.eot?htdcyo');
+    src: url('fonts/icomoon.eot?htdcyo#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf?htdcyo') format('truetype'),
     url('fonts/icomoon.woff?htdcyo') format('woff'),
     url('fonts/icomoon.svg?htdcyo#icomoon') format('svg');
@@ -93,7 +95,6 @@ html {
 html, body {
     min-height: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 body {
