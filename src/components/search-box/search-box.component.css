@@ -64,3 +64,7 @@
         margin-left: 6px;
     }
 }
+
+.ant-form-explain {
+    text-align: left;
+}

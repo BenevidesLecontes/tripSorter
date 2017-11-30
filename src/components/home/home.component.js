@@ -9,6 +9,7 @@ const {Header, Sider, Content} = Layout;
 
 class HomeComponent extends Component {
   toggleForm = () => {
+    console.log(this.form);
     this.form.resetFields();
   };
   
