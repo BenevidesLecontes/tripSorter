@@ -2,15 +2,22 @@
   "name": "propertyfinder",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://BenevidesLecontes.github.io/tripsorter",
   "dependencies": {
     "antd": "^2.13.10",
     "axios": "^0.17.1",
+    "gh-pages": "^1.1.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-fa": "^5.0.0",
-    "react-scripts": "1.0.17"
+    "react-intl": "^2.4.0",
+    "react-intl-formatted-duration": "^1.1.0",
+    "react-scripts": "1.0.17",
+    "styled-components": "^2.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -12,6 +12,7 @@
 
 .result-item {
     text-align: left;
+    margin-bottom: 8px;
 }
 
 .result-item > *, .total > * {
@@ -21,7 +22,6 @@
 }
 
 .total {
-    margin-top: 8px;
     margin-bottom: 8px;
     height: 50px;
     line-height: 45px;

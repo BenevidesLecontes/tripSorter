@@ -1,30 +1,52 @@
 import React, {Component} from 'react';
 import {Button, Card, Col, Row} from 'antd';
+import FormattedDuration from 'react-intl-formatted-duration';
+import styled from 'styled-components';
 import './results.component.css';
+import ItemResultComponent from "./item-result.component";
+import {IntlProvider} from 'react-intl';
+
+const Text = styled.span``;
 
 class ResultsComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: 0,
+      duration: 0
+    }
+  }
+  
+  calculateTotal() {
+    let total = 0;
+    let duration = 0;
+    this.props.items.map((item, key) => {
+      if (item.deal) {
+        total += item.deal.price;
+        duration += item.deal.duration;
+      }
+      return false;
+    });
+    return {total, duration: duration * 60};
+  }
+  
   render() {
     return (
       <Row type="flex" justify="center" className="mt-10">
         <Col xs={10} sm={10} md={21} lg={12}>
           <Card style={{marginTop: 20}} title={'Search Results'}>
             <div className="result">
-              <div className="result-item">
-                <div className="countryInfoAndPrice">
-                  <span className="from">London </span>
-                  <span className="fa fa-angle-right"/>
-                  <span className="to"> Paris</span>
-                  <span className="price"> 100€</span>
+              {this.props.items.map((item, key) => <ItemResultComponent key={key} item={item}/>)}
+              <IntlProvider locale="en">
+                <div className="total">
+                  <p><span className="title">Total</span>
+                    <FormattedDuration seconds={this.calculateTotal().duration}
+                                       textComponent={Text}
+                                       format="{hours} {minutes}"/>
+                    <span className="price">
+                  {this.calculateTotal().total + '€'}</span></p>
                 </div>
-                <div className="transport">
-                  <span className="transport-type">bus</span>
-                  <span className="reference"> TLA0500</span>
-                  <span className="for"> for 01h30</span>
-                </div>
-              </div>
-              <div className="total">
-                <p><span className="title">Total</span> 08h15 <span className="price">480€</span></p>
-              </div>
+              </IntlProvider>
             </div>
             <Button size="large"
                     style={{width: '100%'}}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Button, Col, Form, Radio, Row, Select} from 'antd';
 import './search-box.component.css'
+import {findCheapestRoute, findfastestRoute} from "../../helpers/finder";
 
 const Option = Select.Option;
 
@@ -20,8 +20,10 @@ class SearchBoxComponent extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+      if (values.option === 'a') {
+        this.props.findResults(findCheapestRoute(values.origin, values.destination));
+      } else {
+        this.props.findResults(findfastestRoute(values.origin, values.destination));
       }
     });
   };
@@ -33,7 +35,7 @@ class SearchBoxComponent extends Component {
   };
   customValueValidator = (rule, value, callback) => {
     const formValues = this.props.form.getFieldsValue(['origin', 'destination']);
-    if (formValues && formValues.destination === formValues.origin) {
+    if (value && formValues.destination === formValues.origin) {
       callback(true);
     } else {
       callback();
@@ -59,7 +61,7 @@ class SearchBoxComponent extends Component {
                   onChange={origin => this.handleFormChanges(origin, 'origin')}
                   style={{width: '100%'}}
                   placeholder="From">
-                  {this.state.citiesFrom.sort().map((d, index) => <Option value={d} key={index}>{d}</Option>)}
+                  {this.props.names.map((d, index) => <Option value={d} key={index}>{d}</Option>)}
                 </Select>
               )}
             </Form.Item>
@@ -82,7 +84,7 @@ class SearchBoxComponent extends Component {
                   onChange={destination => this.handleFormChanges(destination, 'destination')}
                   style={{width: '100%'}}
                   placeholder="To">
-                  {this.state.citiesTo.sort().map((d, index) => <Option value={d} key={index}>{d}</Option>)}
+                  {this.props.names.map((d, index) => <Option value={d} key={index}>{d}</Option>)}
                 </Select>
               )}
             </Form.Item>
@@ -113,19 +115,6 @@ class SearchBoxComponent extends Component {
         </Row>
       </Form>
     )
-  }
-  
-  filterDuplicated(deals) {
-    const citiesFrom = deals.map(t => t.departure);
-    const citiesTo = deals.map(t => t.arrival);
-    this.setState({
-      deals, citiesFrom: Array.from(new Set(citiesFrom)),
-      citiesTo: Array.from(new Set(citiesTo))
-    });
-  }
-  
-  componentDidMount() {
-    axios.get('./data/response.json').then(res => this.filterDuplicated(res.data.deals));
   }
 }
 

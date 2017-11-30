@@ -4,13 +4,22 @@ import {Icon} from 'react-fa'
 import './home.component.css'
 import SearchBoxForm from "../search-box/search-box.component";
 import ResultsComponent from "../results/results.component";
+import {getData} from "../../helpers/finder";
 
 const {Header, Sider, Content} = Layout;
 
 class HomeComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      names: [],
+      results: []
+    }
+  }
+  
   toggleForm = () => {
-    console.log(this.form);
     this.form.resetFields();
+    this.setState({results: []});
   };
   
   render() {
@@ -47,12 +56,19 @@ class HomeComponent extends Component {
                     Accusantium alias, aliquam amet architecto.</p>
                 </div>
               </Row>
-              <SearchBoxForm ref={form => this.form = form}/>
-              <ResultsComponent resetForm={this.toggleForm}/>
+              <SearchBoxForm ref={form => this.form = form}
+                             findResults={results => this.setState({results})}
+                             names={this.state.names}/>
+              {this.state.results && this.state.results.length > 0 &&
+              <ResultsComponent items={this.state.results} resetForm={this.toggleForm}/>}
             </main>
           </Content>
         </Layout>
       </Layout>)
+  }
+  
+  componentDidMount() {
+    getData().then(names => this.setState({names}));
   }
 }
 
