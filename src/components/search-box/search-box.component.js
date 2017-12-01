@@ -47,7 +47,7 @@ class SearchBoxComponent extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row type="flex" justify="center" className="mt-10">
-          <Col xs={20} sm={20} md={21} lg={6}>
+          <Col xs={20} sm={20} md={21} lg={6} xl={8}>
             <Form.Item>
               {getFieldDecorator('origin', {
                 rules: [{required: true, message: 'Please select your origin!'}],
@@ -66,7 +66,7 @@ class SearchBoxComponent extends Component {
               )}
             </Form.Item>
           </Col>
-          <Col xs={20} sm={20} md={21} lg={6} className="ml-6-lg">
+          <Col xs={20} sm={20} md={21} lg={6} xl={8} className="ml-6-lg">
             <Form.Item>
               {getFieldDecorator('destination', {
                 rules: [{required: true, message: 'Please select your destination!'},
@@ -89,7 +89,7 @@ class SearchBoxComponent extends Component {
               )}
             </Form.Item>
           </Col>
-          <Col xs={20} sm={20} md={21} lg={6} className="text-right-md">
+          <Col xs={20} sm={20} md={21} lg={6} xl={4} className="text-right-md">
             <Form.Item>
               {getFieldDecorator('option', {
                 initialValue: 'a'
@@ -104,7 +104,7 @@ class SearchBoxComponent extends Component {
               )}
             </Form.Item>
           </Col>
-          <Col xs={20} sm={20} md={21} lg={3} xl={4} className="align-search-btn">
+          <Col xs={20} sm={20} md={21} lg={3} xl={1} className="align-search-btn">
             <Form.Item>
               <Button size="large"
                       htmlType="submit"
