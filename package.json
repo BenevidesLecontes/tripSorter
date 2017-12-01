@@ -2,7 +2,7 @@
   "name": "propertyfinder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://BenevidesLecontes.github.io/tripsorter",
+  "homepage": ".",
   "dependencies": {
     "antd": "^2.13.10",
     "axios": "^0.17.1",
