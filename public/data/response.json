@@ -57,8 +57,8 @@
         "h": "05",
         "m": "30"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BLP0530"
     },
     {
@@ -165,8 +165,8 @@
         "h": "05",
         "m": "45"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BAL0545"
     },
     {
@@ -201,8 +201,8 @@
         "h": "05",
         "m": "15"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BWS0515"
     },
     {
@@ -381,8 +381,8 @@
         "h": "06",
         "m": "15"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BPL0615"
     },
     {
@@ -489,8 +489,8 @@
         "h": "05",
         "m": "15"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BBA0515"
     },
     {
@@ -525,8 +525,8 @@
         "h": "05",
         "m": "45"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BBP0545"
     },
     {
@@ -813,8 +813,8 @@
         "h": "07",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BMK0700"
     },
     {
@@ -885,8 +885,8 @@
         "h": "05",
         "m": "30"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BMP0530"
     },
     {
@@ -921,8 +921,8 @@
         "h": "07",
         "m": "30"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BMG0730"
     },
     {
@@ -1209,8 +1209,8 @@
         "h": "07",
         "m": "45"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BBA0745"
     },
     {
@@ -1245,8 +1245,8 @@
         "h": "05",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BBG0500"
     },
     {
@@ -1317,8 +1317,8 @@
         "h": "06",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BKI0600"
     },
     {
@@ -1353,8 +1353,8 @@
         "h": "06",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BKB0600"
     },
     {
@@ -1461,8 +1461,8 @@
         "h": "07",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BRG0700"
     },
     {
@@ -1533,8 +1533,8 @@
         "h": "05",
         "m": "30"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BRL0530"
     },
     {
@@ -1569,8 +1569,8 @@
         "h": "05",
         "m": "00"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BAB0500"
     },
     {
@@ -1713,8 +1713,8 @@
         "h": "05",
         "m": "15"
       },
-      "cost": 40,
-      "discount": 50,
+      "cost": 50,
+      "discount": 40,
       "reference": "BIA0515"
     },
     {
